@@ -3,4 +3,5 @@ charset-normalizer==2.0.11
 idna==3.3
 pkg-resources==0.0.0
 requests==2.27.1
+schedule==1.1.0
 urllib3==1.26.8

@@ -38,10 +38,13 @@ def cli_args():
 def task(giornata, squadra, magic):
     print(time.localtime())
     
-    voti = request_voti_live(giornata=giornata, codice_squadra=squadre.codici[squadra], magic_number=magic)
-
-    filename = f"{squadra}_{giornata}_{voti['timestamp']}.json"
-    save_json(filename, voti)
+    try:
+        voti = request_voti_live(giornata=giornata, codice_squadra=squadre.codici[squadra], magic_number=magic)
+    except:
+        pass
+    else:
+        filename = f"{squadra}_{giornata}_{voti['timestamp']}.json"
+        save_json(filename, voti)
 
 
 if __name__ == "__main__":

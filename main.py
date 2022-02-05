@@ -10,5 +10,14 @@ def get_voti_live(giornata, codice_squadra, magic_number):
 
 
 # Voti live genoa
-voti = get_voti_live(giornata=24, codice_squadra=squadre.codici["Genoa"], magic_number=16)
-print(voti)
+voti_roma = get_voti_live(giornata=24, codice_squadra=squadre.codici["Roma"], magic_number=16)
+print(voti_roma)
+
+voti_genoa = get_voti_live(giornata=24, codice_squadra=squadre.codici["Genoa"], magic_number=16)
+print(voti_genoa)
+
+voti_inter = get_voti_live(giornata=24, codice_squadra=squadre.codici["Inter"], magic_number=16)
+print(voti_inter)
+
+voti_milan = get_voti_live(giornata=24, codice_squadra=squadre.codici["Milan"], magic_number=16)
+print(voti_milan)

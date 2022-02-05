@@ -1,25 +1,23 @@
-squadre = [
-    "Atalanta",
-    "Bologna",
-    "Cagliari",
-    "Empoli",
-    "Fiorentina",
-    "Genoa",
-    "Hellas Verona",
-    "Inter",
-    "Juventus",
-    "Lazio",
-    "Milan",
-    "Napoli",
-    "Roma",
-    "Salernitana",
-    "Sampdoria",
-    "Sassuolo",
-    "Spezia",
-    "Torino",
-    "Udinese",
-    "Venezia"
-]
-
-codici = {squadra:i+3 for i, squadra in enumerate(squadre)}
+codici = {
+    "Atalanta": 0,
+    "Bologna": 0,
+    "Cagliari": 0,
+    "Empoli": 0,
+    "Fiorentina": 0,
+    "Genoa": 8,
+    "Inter": 9,
+    "Juventus": 0,
+    "Lazio": 0,
+    "Milan": 12,
+    "Napoli": 0,
+    "Roma": 15,
+    "Salernitana": 0,
+    "Sampdoria": 0,
+    "Sassuolo": 0,
+    "Spezia": 0,
+    "Torino": 0,
+    "Udinese": 0,
+    "Venezia": 0,
+    "Verona": 0
+}
 

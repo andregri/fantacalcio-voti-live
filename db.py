@@ -1,5 +1,4 @@
-from mimetypes import init
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 
 db_string = "postgresql://fantallenatore:password@localhost:5432/fantacalcio_db"
 
@@ -42,11 +41,17 @@ def init_tables():
 
 def store_giocatore(giocatore):
     db = create_engine(db_string)
-    result_set = db.execute(f"""
+    result_set = db.execute(text("""
         INSERT INTO giocatore (id, nome, ruolo, squadra) VALUES (
-            {giocatore.id}, '{giocatore.nome}', '{giocatore.ruolo}', '{giocatore.squadra}')
+            :id, :nome, :ruolo, :squadra)
         ON CONFLICT DO NOTHING
-    """)
+    """), {
+        "id": giocatore.id,
+        "nome": giocatore.nome,
+        "ruolo": giocatore.ruolo,
+        "squadra": giocatore.squadra
+    })
+
 
 def store_voto(voto):
     db = create_engine(db_string)

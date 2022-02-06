@@ -6,7 +6,7 @@ codici = {
     "Fiorentina": 6,
     "Genoa": 8,
     "Inter": 9,
-    "Juventus": 0,
+    "Juventus": 10,
     "Lazio": 11,
     "Milan": 12,
     "Napoli": 0,
@@ -18,6 +18,6 @@ codici = {
     "Torino": 18,
     "Udinese": 19,
     "Venezia": 0,
-    "Verona": 0
+    "Verona": 20
 }
 

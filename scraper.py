@@ -74,6 +74,8 @@ if __name__ == "__main__":
 
     print(f"Start @ {time.localtime()}")
 
+    db.init_tables()
+
     schedule.every(30).seconds.until(args.until).do(
         task, args.giornata, args.squadra, args.magic)
 

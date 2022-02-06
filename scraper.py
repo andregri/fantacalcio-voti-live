@@ -4,6 +4,16 @@ import squadre
 import requests
 import schedule
 import argparse
+import db
+from datetime import datetime
+
+def now():
+    # datetime object containing current date and time
+    time = datetime.now()
+
+    # dd/mm/YY H:M:S
+    return time.strftime("%d/%m/%Y %H:%M:%S")
+
 
 def request_voti_live(giornata, codice_squadra, magic_number):
     url = f"https://www.fantacalcio.it/api/live/{codice_squadra}?g={giornata}&i={magic_number}"
@@ -11,7 +21,7 @@ def request_voti_live(giornata, codice_squadra, magic_number):
     json_resp = response.json()
     json_resp_time = {
         "voti": json_resp,
-        "timestamp": round(time.time())
+        "timestamp": now()
     }
     return json_resp_time
 
@@ -19,6 +29,11 @@ def request_voti_live(giornata, codice_squadra, magic_number):
 def save_json(filename, voti_live):
     with open(filename, "w") as f:
         json.dump(voti_live, f, indent=4)
+
+
+def save2postgres(giocatore, voto):
+    db.store_giocatore(giocatore)
+    db.store_voto(voto)
 
 
 def cli_args():
@@ -39,12 +54,16 @@ def task(giornata, squadra, magic):
     print(time.localtime())
     
     try:
-        voti = request_voti_live(giornata=giornata, codice_squadra=squadre.codici[squadra], magic_number=magic)
+        resp = request_voti_live(giornata=giornata, codice_squadra=squadre.codici[squadra], magic_number=magic)
     except:
         pass
     else:
-        filename = f"{squadra}_{giornata}_{voti['timestamp']}.json"
-        save_json(filename, voti)
+        #filename = f"{squadra}_{giornata}_{voti['timestamp']}.json"
+        #save_json(filename, resp)
+        for el in resp["voti"]:
+            giocatore = db.Giocatore(el["id"], el["nome"], el["ruolo"], squadra)
+            voto = db.Voto(el["id"], giornata, el["voto"], el["evento"], resp["timestamp"])
+            save2postgres(giocatore, voto)
 
 
 if __name__ == "__main__":

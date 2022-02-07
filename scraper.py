@@ -7,6 +7,9 @@ import argparse
 import db
 from datetime import datetime
 
+cache_giocatori = {} # key: id giocatore
+cache_voto = {} # key: id giocatore
+
 def now():
     # datetime object containing current date and time
     time = datetime.now()
@@ -31,9 +34,14 @@ def save_json(filename, voti_live):
         json.dump(voti_live, f, indent=4)
 
 
-def save2postgres(giocatore, voto):
+def store_giocatore(giocatore):
     db.store_giocatore(giocatore)
+    cache_giocatori[giocatore.id] = giocatore
+
+
+def store_voto(voto):
     db.store_voto(voto)
+    cache_voto[voto.id_giocatore] = voto
 
 
 def cli_args():
@@ -58,12 +66,21 @@ def task(giornata, squadra, magic):
     except:
         pass
     else:
-        #filename = f"{squadra}_{giornata}_{voti['timestamp']}.json"
-        #save_json(filename, resp)
         for el in resp["voti"]:
+            # create objects from json response
             giocatore = db.Giocatore(el["id"], el["nome"], el["ruolo"], squadra)
             voto = db.Voto(el["id"], giornata, el["voto"], el["evento"], resp["timestamp"])
-            save2postgres(giocatore, voto)
+
+            # compare giocatore to cache
+            if not giocatore.id in cache_giocatori:
+                store_giocatore(giocatore)
+
+            # compare voto to cache
+            if not voto.id_giocatore in cache_voto:
+                store_voto(voto)
+            else:
+                if cache_voto[voto.id_giocatore] != voto:
+                    store_voto(voto)
 
 
 if __name__ == "__main__":

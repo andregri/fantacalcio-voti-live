@@ -17,6 +17,13 @@ class Voto:
         self.voto = voto
         self.eventi = eventi
         self.timestamp = timestamp
+    
+    def __eq__(self, other): 
+        if not isinstance(other, Voto):
+            # don't attempt to compare against unrelated types
+            return NotImplemented
+
+        return self.voto == other.voto and self.eventi == other.eventi
 
 
 def init_tables():

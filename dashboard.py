@@ -1,6 +1,7 @@
 # Run this app with `python app.py` and
 # visit http://127.0.0.1:8050/ in your web browser.
 
+from datetime import datetime
 from dash import Dash, html, dcc
 from dash.dependencies import Input, Output
 import plotly.express as px
@@ -78,6 +79,13 @@ def update_graph_live(n, nome_giocatore):
     """)
     db_engine = create_engine(app_db.db_string)
     voti_df = pd.read_sql(t, db_engine, params={'nome': nome_giocatore})
+    if len(voti_df) == 1:
+        # replicate the last voto so it can plot at least 2 values
+        last_voto = voti_df.at[0, 'voto']
+        last_time = datetime.now().strftime("%Y-%d-%m %H:%M:%S")
+        voti_df = voti_df.append({'voto': last_voto, 'timestamp': last_time}, ignore_index=True)
+        print(voti_df)
+
     fig = px.line(voti_df, x="timestamp", y="voto")
     return fig
 

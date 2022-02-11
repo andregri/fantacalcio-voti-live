@@ -6,7 +6,7 @@ from dash import Dash, html, dcc
 from dash.dependencies import Input, Output
 import plotly.express as px
 import pandas as pd
-from sqlalchemy import create_engine, text
+from sqlalchemy import text
 import db as app_db
 
 app = Dash(__name__)

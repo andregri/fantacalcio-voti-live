@@ -14,9 +14,14 @@ app = Dash(__name__)
 app.layout = html.Div(children=[
     html.H1(children='Voti Live'),
 
-    html.Div(children='''
-        Guarda come variano i voti live nel tempo!
+    html.H2(children='''
+        Guarda come variano i voti live durante la partita!
     '''),
+
+    dcc.Dropdown(
+        placeholder='Giornata',
+        id='giornata-dropdown'
+    ),
 
     html.P([
         html.Label("Squadra"),
@@ -38,12 +43,26 @@ app.layout = html.Div(children=[
 ])
 
 
-@app.callback(Output('squadra-dropdown', 'options'),
+@app.callback(Output('giornata-dropdown', 'options'),
               Input('interval-component', 'n_intervals'))
-def update_squadra_dropdown(n):
+def update_giornata_dropdown(n):
+    t = text("""
+        SELECT DISTINCT ON (giornata) giornata
+        FROM public.voto
+        ORDER BY giornata;
+    """)
+    db_engine = create_engine(app_db.db_string)
+    giornate_df = pd.read_sql(t, db_engine)
+    return giornate_df['giornata'].tolist()
+
+
+@app.callback(Output('squadra-dropdown', 'options'),
+              Input('giornata-dropdown', 'value'))
+def update_squadra_dropdown(giornata):
     t = text("""
         SELECT DISTINCT ON (squadra) squadra
-        FROM public.giocatore
+        FROM public.giocatore, public.voto
+        WHERE voto.giornata = giornata
         ORDER BY squadra;
     """)
     db_engine = create_engine(app_db.db_string)

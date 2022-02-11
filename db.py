@@ -1,7 +1,11 @@
+import os
 from sqlalchemy import create_engine, text
+from dotenv import load_dotenv
 
-db_string = "postgresql://fantallenatore:password@localhost:5432/fantacalcio_db"
-
+load_dotenv()
+#db_string = "postgresql://fantallenatore:password@localhost:5432/fantacalcio_db"
+db_string = os.environ.get('DB_PROD')
+db = create_engine(db_string)
 
 class Giocatore:
     def __init__(self, id, nome, ruolo, squadra):
@@ -47,7 +51,7 @@ def init_tables():
 
 
 def store_giocatore(giocatore):
-    db = create_engine(db_string)
+    #db = create_engine(db_string)
     result_set = db.execute(text("""
         INSERT INTO giocatore (id, nome, ruolo, squadra) VALUES (
             :id, :nome, :ruolo, :squadra)
@@ -61,7 +65,7 @@ def store_giocatore(giocatore):
 
 
 def store_voto(voto):
-    db = create_engine(db_string)
+    #db = create_engine(db_string)
     result_set = db.execute(f"""
         INSERT INTO voto (id_giocatore, giornata, voto, eventi, timestamp) VALUES (
             '{voto.id_giocatore}', {voto.giornata}, {voto.voto}, '{voto.eventi}', '{voto.timestamp}')

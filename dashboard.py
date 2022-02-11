@@ -11,6 +11,8 @@ import db as app_db
 
 app = Dash(__name__)
 
+db_engine = app_db.db
+
 app.layout = html.Div(children=[
     html.H1(children='Voti Live'),
 
@@ -51,7 +53,7 @@ def update_giornata_dropdown(n):
         FROM public.voto
         ORDER BY giornata;
     """)
-    db_engine = create_engine(app_db.db_string)
+    #db_engine = create_engine(app_db.db_string)
     giornate_df = pd.read_sql(t, db_engine)
     return giornate_df['giornata'].tolist()
 
@@ -65,7 +67,7 @@ def update_squadra_dropdown(giornata):
         WHERE voto.giornata = giornata
         ORDER BY squadra;
     """)
-    db_engine = create_engine(app_db.db_string)
+    #db_engine = create_engine(app_db.db_string)
     squadre_df = pd.read_sql(t, db_engine)
     return squadre_df['squadra'].tolist()
 
@@ -79,7 +81,7 @@ def update_giocatore_dropdown(squadra):
         WHERE giocatore.squadra = :squadra
         ORDER BY nome;
     """)
-    db_engine = create_engine(app_db.db_string)
+    #db_engine = create_engine(app_db.db_string)
     giocatori_df = pd.read_sql(t, db_engine, params={'squadra': squadra})
     return giocatori_df['nome'].tolist()
 
@@ -96,14 +98,13 @@ def update_graph_live(n, nome_giocatore):
             giocatore.id = voto.id_giocatore AND
             giocatore.nome = :nome
     """)
-    db_engine = create_engine(app_db.db_string)
+    #db_engine = create_engine(app_db.db_string)
     voti_df = pd.read_sql(t, db_engine, params={'nome': nome_giocatore})
     if len(voti_df) == 1:
         # replicate the last voto so it can plot at least 2 values
         last_voto = voti_df.at[0, 'voto']
-        last_time = datetime.now().strftime("%m/%d/%Y %H:%M:%S %H:%M:%S")
+        last_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         voti_df = voti_df.append({'voto': last_voto, 'timestamp': last_time}, ignore_index=True)
-        print(voti_df)
 
     fig = px.line(voti_df, x="timestamp", y="voto")
     return fig

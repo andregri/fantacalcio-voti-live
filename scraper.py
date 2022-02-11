@@ -15,7 +15,7 @@ def now():
     time = datetime.now()
 
     # dd/mm/YY H:M:S
-    return time.strftime("%d/%m/%Y %H:%M:%S")
+    return time.strftime("%m/%d/%Y %H:%M:%S")
 
 
 def request_voti_live(giornata, codice_squadra, magic_number):

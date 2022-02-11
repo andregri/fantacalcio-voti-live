@@ -101,7 +101,7 @@ def update_graph_live(n, nome_giocatore):
     if len(voti_df) == 1:
         # replicate the last voto so it can plot at least 2 values
         last_voto = voti_df.at[0, 'voto']
-        last_time = datetime.now().strftime("%Y-%d-%m %H:%M:%S")
+        last_time = datetime.now().strftime("%m/%d/%Y %H:%M:%S %H:%M:%S")
         voti_df = voti_df.append({'voto': last_voto, 'timestamp': last_time}, ignore_index=True)
         print(voti_df)
 

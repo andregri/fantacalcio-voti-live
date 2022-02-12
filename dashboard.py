@@ -1,7 +1,7 @@
 # Run this app with `python app.py` and
 # visit http://127.0.0.1:8050/ in your web browser.
 
-from datetime import datetime
+from datetime import datetime, timedelta
 from dash import Dash, html, dcc
 from dash.dependencies import Input, Output
 import pandas as pd
@@ -102,11 +102,20 @@ def update_graph_live(n, nome_giocatore):
     """)
     #db_engine = create_engine(app_db.db_string)
     voti_df = pd.read_sql(t, db_engine, params={'nome': nome_giocatore})
-    if len(voti_df) == 1:
-        # replicate the last voto so it can plot at least 2 values
-        last_voto = voti_df.at[0, 'voto']
+
+    if len(voti_df) > 0:
+        # prepend a value equal to the first row
+        first_voto = voti_df['voto'].iloc[0]
+        first_time = voti_df['timestamp'].iloc[0] - timedelta(hours=0, minutes=5)
+        first_time = first_time.strftime("%Y-%m-%d %H:%M:%S")
+        df1 = pd.DataFrame([[first_voto, first_time]], columns=['voto','timestamp'])
+
+        # append a value equal to the last row
+        last_voto = voti_df['voto'].iloc[-1]
         last_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        voti_df = voti_df.append({'voto': last_voto, 'timestamp': last_time}, ignore_index=True)
+        df2 = pd.DataFrame([[last_voto, last_time]], columns=['voto','timestamp'])
+
+        voti_df = pd.concat([df1, voti_df, df2], ignore_index=True)
 
     fig = px.line(voti_df, x="timestamp", y="voto")
     return fig

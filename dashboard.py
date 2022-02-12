@@ -11,6 +11,8 @@ import db as app_db
 
 app = Dash(__name__)
 
+server = app.server
+
 db_engine = app_db.db
 
 app.layout = html.Div(children=[

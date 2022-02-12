@@ -4,8 +4,8 @@
 from datetime import datetime
 from dash import Dash, html, dcc
 from dash.dependencies import Input, Output
-import plotly.express as px
 import pandas as pd
+import plotly.express as px
 from sqlalchemy import text
 import db as app_db
 

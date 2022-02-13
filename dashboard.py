@@ -108,21 +108,21 @@ def update_graph_live(n, nome_giocatore):
     #db_engine = create_engine(app_db.db_string)
     voti_df = pd.read_sql(t, db_engine, params={'nome': nome_giocatore})
 
+    # Append a dataframe item populated with the last 'voto' and the current time.
+    # Time is saturated to 2 hours and 10 minutes.
     if len(voti_df) > 0:
-        # prepend a value equal to the first row
-        first_voto = voti_df['voto'].iloc[0]
-        first_time = voti_df['timestamp'].iloc[0] - timedelta(hours=0, minutes=5)
-        first_time = first_time.strftime("%Y-%m-%d %H:%M:%S")
-        df1 = pd.DataFrame([[first_voto, first_time]], columns=['voto','timestamp'])
+        # create a new 'voto' equal to the last row
+        voto_last_row = voti_df['voto'].iloc[-1]
 
-        # append a value equal to the last row
-        last_voto = voti_df['voto'].iloc[-1]
-        last_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        df2 = pd.DataFrame([[last_voto, last_time]], columns=['voto','timestamp'])
+        # saturate time to max 2 hours and 10 minutes from the first row 
+        time_last_row = voti_df['timestamp'].iloc[0]
+        time = datetime.now()
+        time = min(time, time_last_row + timedelta(hours=2, minutes=10))
+        new_row_df = pd.DataFrame([[voto_last_row, time.strftime("%Y-%m-%d %H:%M:%S")]], columns=['voto','timestamp'])
 
-        voti_df = pd.concat([df1, voti_df, df2], ignore_index=True)
+        voti_df = pd.concat([voti_df, new_row_df], ignore_index=True)
 
-    fig = px.line(voti_df, x="timestamp", y="voto")
+    fig = px.line(voti_df, x="timestamp", y="voto", line_shape='hv')
     return fig
 
 

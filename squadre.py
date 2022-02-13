@@ -1,8 +1,8 @@
 codici = {
     "Atalanta": 1,
     "Bologna": 2,
-    "Cagliari": 5,
-    "Empoli": 21,
+    "Cagliari": 21,
+    "Empoli": 5,
     "Fiorentina": 6,
     "Genoa": 8,
     "Inter": 9,

@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 import os
 import time
 from dash import Dash, html, dcc
-from dash.dependencies import Input, Output
+from dash.dependencies import Input, Output, State
 import pandas as pd
 import plotly.express as px
 from sqlalchemy import text
@@ -95,18 +95,26 @@ def update_giocatore_dropdown(squadra):
 
 @app.callback(Output('live-update-graph', 'figure'),
               Input('interval-component', 'n_intervals'),
-              Input('giocatore-dropdown', 'value'))
-def update_graph_live(n, nome_giocatore):
+              Input('giocatore-dropdown', 'value'),
+              State('squadra-dropdown', 'value'),
+              State('giornata-dropdown', 'value'))
+def update_graph_live(n, nome_giocatore, squadra, giornata):
     t = text("""
         SELECT voto, timestamp FROM 
             public.giocatore, 
             public.voto
         WHERE 
             giocatore.id = voto.id_giocatore AND
-            giocatore.nome = :nome
+            giocatore.nome = :nome AND
+            giocatore.squadra = :squadra AND
+            voto.giornata = :giornata
     """)
     #db_engine = create_engine(app_db.db_string)
-    voti_df = pd.read_sql(t, db_engine, params={'nome': nome_giocatore})
+    voti_df = pd.read_sql(t, db_engine, params={
+        'nome': nome_giocatore,
+        'squadra': squadra,
+        'giornata': giornata
+    })
 
     # Append a dataframe item populated with the last 'voto' and the current time.
     # Time is saturated to 2 hours and 10 minutes.

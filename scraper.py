@@ -50,7 +50,8 @@ def cli_args():
         description="Record voti live"
     )
 
-    parser.add_argument("--squadra", dest="squadra", type=str)
+    parser.add_argument('squadre', metavar='squadre', type=str, nargs='+', 
+                        help='squadre to be monitored')
     parser.add_argument("--giornata", dest="giornata", type=int)
     parser.add_argument("--magic", dest="magic", type=int, default=16)
     parser.add_argument("--until", dest="until", type=str)
@@ -59,7 +60,7 @@ def cli_args():
 
 
 def task(giornata, squadra, magic):
-    print(time.localtime())
+    print(f"{squadra} {now()}")
     
     try:
         resp = request_voti_live(giornata=giornata, codice_squadra=squadre.codici[squadra], magic_number=magic)
@@ -85,16 +86,17 @@ def task(giornata, squadra, magic):
 
 if __name__ == "__main__":
     args = cli_args()
-    print(f"Squadra: {args.squadra}")
+    print(f"Squadre: {args.squadre}")
     print(f"Giornata: {args.giornata}")
     print(f"Until: {args.until}")
 
-    print(f"Start @ {time.localtime()}")
+    print(f"Start @ {now()}")
 
     db.init_tables()
 
-    schedule.every(30).seconds.until(args.until).do(
-        task, args.giornata, args.squadra, args.magic)
+    for squadra in args.squadre:
+        schedule.every(30).seconds.until(args.until).do(
+            task, args.giornata, squadra, args.magic)
 
     while True:
         schedule.run_pending()

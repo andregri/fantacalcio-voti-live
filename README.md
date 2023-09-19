@@ -1,3 +1,9 @@
+# Requirements
+```
+npm install protobufjs
+```
+
+# How to run
 ```
 python3 scraper.py "Empoli" "Cagliari" "Udinese" "Verona" "Genoa" "Salernitana" --giornata 25 --until "17:00"
 ```

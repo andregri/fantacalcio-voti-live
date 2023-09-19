@@ -21,7 +21,7 @@ def now():
 
 def request_voti_live(giornata, codice_squadra, magic_number):
     signed_uri = utils.get_signed_uri(giornata, season_id=18)
-    msg_b64 = utils.get_protobuf_message_b64(signed_uri)    
+    msg_b64 = utils.get_protobuf_message_b64(signed_uri)
     all_data = utils.decode_protobuf_live_msg(msg_b64)
     json_resp = utils.get_voti(all_data, codice_squadra)
     json_resp_time = {
@@ -71,8 +71,8 @@ def task(giornata, squadra, magic):
     else:
         for el in resp["voti"]:
             # create objects from json response
-            giocatore = db.Giocatore(el["id"], el["nome"], el["ruolo"], squadra)
-            voto = db.Voto(el["id"], giornata, el["voto"], el["evento"], resp["timestamp"])
+            giocatore = db.Giocatore(el["id"], el["name"], el["position"], squadra)
+            voto = db.Voto(el["id"], giornata, el["vote"], el.get("events"), resp["timestamp"])
 
             # compare giocatore to cache
             if not giocatore.id in cache_giocatori:

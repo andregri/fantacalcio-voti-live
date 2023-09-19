@@ -6,6 +6,7 @@ import schedule
 import argparse
 import db
 from datetime import datetime
+import utils
 
 cache_giocatori = {} # key: id giocatore
 cache_voto = {} # key: id giocatore
@@ -19,9 +20,9 @@ def now():
 
 
 def request_voti_live(giornata, codice_squadra, magic_number):
-    url = f"https://www.fantacalcio.it/api/live/{codice_squadra}?g={giornata}&i={magic_number}"
-    response = requests.get(url, timeout=10)
-    json_resp = response.json()
+    signed_uri = utils.get_signed_uri(giornata, season_id=18)
+    msg_b64 = utils.get_protobuf_message_b64(signed_uri)    
+    json_resp = utils.decode_protobuf_live_msg(msg_b64) # TODO: need processing based on "codice_squadra"
     json_resp_time = {
         "voti": json_resp,
         "timestamp": now()

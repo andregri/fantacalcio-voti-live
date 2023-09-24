@@ -3,8 +3,8 @@ from sqlalchemy import create_engine, text
 from dotenv import load_dotenv
 
 load_dotenv()
-#db_string = "postgresql://fantallenatore:password@localhost:5432/fantacalcio_db"
-db_string = os.environ.get('DB_PROD')
+db_string = "postgresql://fantallenatore:password@localhost:5432/fantacalcio_db"
+#db_string = os.environ.get('DB_PROD')
 db = create_engine(db_string)
 
 class Giocatore:

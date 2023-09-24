@@ -52,13 +52,13 @@ sudo docker exec -it fantacalcio_db bash
 
 Log into the db:
 ```
-root@e7c9e144080e:/# psql -U fantallenatore -d fantacalcio_db
+psql -U fantallenatore -d fantacalcio_db
 ```
 
 Show the tables:
 ```
-fantacalcio_db=# select * from giocatore;
-fantacalcio_db=# select * from voto;
+select * from giocatore;
+select * from voto;
 ```
 
 ## Run the scraper with crontab

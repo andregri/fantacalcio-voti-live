@@ -8,6 +8,6 @@ const jsonDescriptor = require('./proto.json');
 var root = protobuf.Root.fromJSON(jsonDescriptor);
 const modelName = "LiveMessage"
 var ModelData = root.lookupType(modelName);
-var buffer = Uint8Array.from(atob(payload), c => c.charCodeAt(0))
+var buffer = Buffer.from(payload, 'base64')
 msg = ModelData.decode(buffer);
 console.log(JSON.stringify(msg, null, 4));

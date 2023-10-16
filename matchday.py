@@ -14,13 +14,28 @@ event_mapper = {
    2: "espulsione",
    3: "goal",
    4: "goal subito",
+   9: "unknwon",  # ?
+   11: "unknwon",  # maybe "goal decisivo" ?
+   12: "unknwon",  # ?
    14: "sub out",
    15: "sub in",
+   17: "unknown",  # ?
+   20: "unknwon",  # ?
+   21: "unknwon",  # ?
    22: "assist",
 }
 
+# Apparently 55 is their designated magic number for SV
+SV = 55
+
 modmodulo = {}
-modmodulo['P' + 3*'D' + 5*'C' + 2*'A'] = 0.5
+modmodulo['P' + 4*'D' + 4*'C' + 2*'A'] = 0
+modmodulo['P' + 3*'D' + 5*'C' + 2*'A'] = -0.5
+modmodulo['P' + 4*'D' + 3*'C' + 3*'A'] = -1.0
+modmodulo['P' + 3*'D' + 4*'C' + 3*'A'] = -1.5
+modmodulo['P' + 5*'D' + 3*'C' + 2*'A'] = 0.5
+modmodulo['P' + 4*'D' + 5*'C' + 1*'A'] = 1
+modmodulo['P' + 5*'D' + 4*'C' + 1*'A'] = 1.5
 
 """
 {
@@ -43,13 +58,32 @@ def get_punteggi_lega():
     with open(path, 'r') as file:
         punteggi = json.load(file)
 
+    punteggi['unknown'] = 0
+
     return punteggi
+
+
+def get_ruoli_lega():
+    path = "data/ruoli.txt"  # TODO
+    with open(path, 'r') as file:
+        ruoli = file.readlines()
+
+    mapper = {}
+    for i in ruoli:
+        # Expected format: ruolo, spaces, name, \n
+        pos, name = i.replace("\n", "").split("\t")
+        mapper[name] = pos
+
+    return mapper
 
 
 def parse_fantasquadre():
     path = "data/formazioni"  # TODO
     fantasquadre = []
     for filename in os.listdir(path):
+        if filename.startswith('.'):
+            continue
+
         file_path = os.path.join(path, filename)
 
         if os.path.isfile(file_path):
@@ -87,23 +121,36 @@ def calc_voto_live(giocatore, punteggi):
             # E.g., sub out
             continue
 
+        # We have the rule that SV+bonus_malus => 6+bonus_malus
+        if vote == SV:
+            vote = 6
+
         vote += bonus_malus
 
-    return vote 
+    if vote == 55:
+        return 0
+    else:
+        return vote 
 
 
-def calc_tot_fantasquadra(titolari, panchinari):
+def calc_tot_fantasquadra(titolari, panchinari, ruoli):
     tot = 0
     modulo = ""
-    for v in titolari.values():
-        try:
-            voto, pos = v
-        except TypeError:
+    for name, voto in titolari.items():
+        pos = ruoli[name]
+
+        if voto == 0:
+            # Perform sub
             # TODO: auto-create / auto-update file mapping giocatore -> ruolo
             # Then perform sub
             # For now, assume voto==6
-            voto = 6
-            pos = 'N'
+            for i in list(panchinari):
+                subpos = ruoli[i]
+                if subpos == pos:
+                    voto = panchinari.pop(i)
+                    pos = subpos
+                    if voto != 0:
+                        break
 
         tot += voto
         modulo += pos
@@ -123,9 +170,11 @@ if __name__ == "__main__":
     # Launch: python matchday.py
     # Prerequisites:
     # * `punteggi.json` must be available
+    # * `ruoli.txt` must be available
     # * `formazioni/` must be available
 
     punteggi = get_punteggi_lega()
+    ruoli = get_ruoli_lega()
 
     fantasquadre = parse_fantasquadre()
 
@@ -140,16 +189,15 @@ if __name__ == "__main__":
         for giocatore in serie_a_team:
             for team, (titolari, panchinari) in fantasquadre.items():
                 name = giocatore['name']
-                pos = giocatore['position']
 
                 if name in titolari:
-                    titolari[name] = (calc_voto_live(giocatore, punteggi), pos)
+                    titolari[name] = calc_voto_live(giocatore, punteggi)
                 elif name in panchinari:
-                    panchinari[name] = (calc_voto_live(giocatore, punteggi), pos)
+                    panchinari[name] = calc_voto_live(giocatore, punteggi)
                 else:
                     continue
 
-    totali = {team: calc_tot_fantasquadra(titolari, panchinari)
+    totali = {team: calc_tot_fantasquadra(titolari, panchinari, ruoli)
               for team, (titolari, panchinari) in fantasquadre.items()}
 
     print(totali)

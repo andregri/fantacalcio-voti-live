@@ -152,4 +152,4 @@ if __name__ == "__main__":
     totali = {team: calc_tot_fantasquadra(titolari, panchinari)
               for team, (titolari, panchinari) in fantasquadre.items()}
 
-    from IPython import embed; embed()
+    print(totali)

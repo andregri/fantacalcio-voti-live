@@ -1,0 +1,200 @@
+P	Meret
+P	Silvestri
+P	Ochoa
+D	Izzo
+D	Acerbi
+D	Milenkovic
+D	Mancini
+D	Di Lorenzo
+D	Lazaro
+D	Tomori
+D	Baschirotto
+C	Pereyra
+C	Luis Alberto
+C	Barak
+C	Pessina
+C	Lobotka
+C	Bajrami
+C	Koopmeiners
+C	Miretti
+A	Sanabria
+A	Kean
+A	Martinez L.
+A	Rafael Leao
+A	Almqvist
+A	Cheddira
+P	Milinkovic-Savic V.
+P	Terracciano
+P	Christensen O.
+D	Cuadrado
+D	Rodriguez R.
+D	Martin
+D	Llorente D.
+D	Dumfries
+D	Gatti
+D	Ebosele
+D	Kristiansen
+C	Mazzitelli
+C	Orsolini
+C	Calhanoglu
+C	Pulisic
+C	Frendrup
+C	Lovric
+C	Lindstrom
+C	Rafia
+A	Dybala
+A	Petagna
+A	Bonazzoli
+A	Berardi
+A	Brekalo
+A	Zirkzee
+P	Consigli
+P	Falcone
+P	Provedel
+D	Dimarco
+D	Calabria
+D	Djimsiti
+D	Spinazzola
+D	Marusic
+D	Darmian
+D	Holm
+D	Bijol
+C	Zaccagni
+C	Gagliardini
+C	Guendouzi
+C	Loftus-Cheek
+C	Kostic
+C	Messias
+C	Baldanzi
+C	Fabbian
+A	Muriel
+A	Immobile
+A	Deulofeu
+A	Jovic
+A	Osimhen
+A	Krstovic
+P	Radunovic
+P	Rui Patricio
+P	Turati
+D	Pavard
+D	Hernandez T.
+D	N'dicka
+D	Mazzocchi
+D	Casale
+D	Olivera
+D	Beukema
+D	Kristensen
+C	De Roon
+C	Pellegrini Lo.
+C	Mkhitaryan
+C	Zambo Anguissa
+C	Duda
+C	Chukwueze
+C	Colpani
+C	Kamada
+A	Caprari
+A	Simeone
+A	Giroud
+A	Arnautovic
+A	Raspadori
+A	Thuram
+P	Sportiello
+P	Mirante
+P	Maignan
+D	Zappacosta
+D	Kolasinac
+D	Rrahmani
+D	Augello
+D	Ebuehi
+D	Schuurs
+D	Posch
+D	Oyono
+C	Candreva
+C	Felipe Anderson
+C	Locatelli
+C	Barella
+C	Fagioli
+C	Maldini
+C	Samardzic
+C	Ciurria
+A	Zapata D.
+A	Lukaku
+A	Gonzalez N.
+A	Mota
+A	Lauriente'
+A	Ngonge
+P	Skorupski
+P	Sommer
+P	Montipo'
+D	De Vrij
+D	Faraoni
+D	Lazzari
+D	Bremer
+D	Smalling
+D	Kalulu
+D	Ruggeri
+D	Thiaw
+C	Bonaventura
+C	Aouar
+C	Malinovskyi
+C	Radonjic
+C	Ndoye
+C	Vlasic
+C	De Ketelaere
+C	Reijnders
+A	Milik
+A	Scamacca
+A	Luvumbo
+A	Lucca
+A	Retegui
+A	Beltran L.
+P	Perin
+P	Szczesny
+P	Martinez Jo.
+D	Biraghi
+D	Danilo
+D	Bellanova
+D	Bakker
+D	Parisi
+D	Cambiaso
+D	Scalvini
+D	Carlos Augusto
+C	Zielinski
+C	Arthur Melo
+C	Strefezza
+C	Weah
+C	Mckennie
+C	Ederson D.s.
+C	Gudmundsson A.
+C	Ferguson
+A	Pinamonti
+A	Vlahovic
+A	Colombo
+A	Dia
+A	Toure' E.
+A	Karlsson
+P	Musso
+P	Carnesecchi
+P	Di Gregorio
+D	Mario Rui
+D	Romagnoli
+D	Toloi
+D	Bastoni
+D	Buongiorno
+D	Vojvoda
+D	Doig
+D	Natan
+C	Lazovic
+C	Politano
+C	Cristante
+C	Pasalic
+C	Rabiot
+C	Frattesi
+C	Elmas
+C	Ricci S.
+A	Chiesa
+A	Caputo
+A	Lookman
+A	Nzola
+A	Kvaratskhelia
+A	Castellanos

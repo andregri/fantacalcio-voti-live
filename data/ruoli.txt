@@ -198,3 +198,18 @@ A	Lookman
 A	Nzola
 A	Kvaratskhelia
 A	Castellanos
+A	Thauvin
+D	Pellegrini Lu.
+D	Azzi
+D	Mina
+D	Dodo'
+C	Renato Sanches
+C	Folorunsho
+C	Ilic
+C	Rovella
+C	Sensi
+A	Okafor
+P	Svilar
+A	El Shaarawy
+A	Pedro
+A	Beto *

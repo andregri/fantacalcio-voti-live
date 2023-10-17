@@ -23,6 +23,8 @@ event_mapper = {
    20: "unknwon",  # ?
    21: "unknwon",  # ?
    22: "assist",
+   # Custom events
+   99: "cleansheet",
 }
 
 # Apparently 55 is their designated magic number for SV
@@ -95,6 +97,9 @@ def parse_fantasquadre():
     for i in fantasquadre:
         items = i.split("\n")
 
+        # Sanitize (some hand-crafted files might include \t too)
+        items = [j.replace("\t", "") for j in items]
+
         name = items[0]
         manager = items[1]
         titolari = {i: 0 for i in items[3:14]}  # giocatore -> voto
@@ -103,6 +108,26 @@ def parse_fantasquadre():
         mapper[name] = (titolari, panchinari)
 
     return mapper
+
+
+def inject_custom_events(data):
+    matches = data['protoData']
+
+    # Cleansheet event
+    for match in matches:
+        goalHome = match.get('goalHome', 0)
+        goalAway = match.get('goalAway', 0)
+
+        if goalHome == 0:
+            for i in match['playersAway']:
+                if i['position'] == 'P':
+                    i.setdefault('events', []).append(99)
+                    i.setdefault('eventsMinutes', []).append(120)  # Dummy min
+        if goalAway == 0:
+            for i in match['playersHome']:
+                if i['position'] == 'P':
+                    i.setdefault('events', []).append(99)
+                    i.setdefault('eventsMinutes', []).append(120)  # Dummy min
 
 
 def calc_voto_live(giocatore, punteggi):
@@ -141,9 +166,6 @@ def calc_tot_fantasquadra(titolari, panchinari, ruoli):
 
         if voto == 0:
             # Perform sub
-            # TODO: auto-create / auto-update file mapping giocatore -> ruolo
-            # Then perform sub
-            # For now, assume voto==6
             for i in list(panchinari):
                 subpos = ruoli[i]
                 if subpos == pos:
@@ -180,6 +202,8 @@ if __name__ == "__main__":
 
     data = decode_protobuf_live_msg(encoded)
 
+    inject_custom_events(data)
+
     for v in codici.values():
         serie_a_team = get_voti(data, v)
 
@@ -200,4 +224,7 @@ if __name__ == "__main__":
     totali = {team: calc_tot_fantasquadra(titolari, panchinari, ruoli)
               for team, (titolari, panchinari) in fantasquadre.items()}
 
-    print(totali)
+    # Nicely formatted output...
+    max_width = max(len(i) for i in totali)
+    for i in sorted(totali, key=totali.get, reverse=True):
+        print(f"{i:>{max_width}} {totali[i]:.1f}")

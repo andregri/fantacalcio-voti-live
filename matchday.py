@@ -278,10 +278,12 @@ if __name__ == "__main__":
 
     inject_custom_events(data)
 
-    for v in codici.values():
+    unplayed = []
+    for k, v in codici.items():
         serie_a_team = get_voti(data, v)
 
         if not serie_a_team:
+            unplayed.append(k)
             continue
 
         for giocatore in serie_a_team:
@@ -294,6 +296,13 @@ if __name__ == "__main__":
                     panchinari[name] = calc_voto_live(giocatore, punteggi)
                 else:
                     continue
+
+    # Amend vote if player hasn't played yet
+    for titolari_panchinari in fantasquadre.values():
+        for m in titolari_panchinari:
+            for name, vote in list(m.items()):
+                if any(i.startswith(squadre[name]) for i in unplayed):
+                    m[name] = 6  # S.V.
 
     totali = {team: calc_tot_fantasquadra(titolari, panchinari, ruoli)
               for team, (titolari, panchinari) in fantasquadre.items()}

@@ -14,7 +14,6 @@ RUN apt-get install -y libpq-dev
 RUN apt install -y nodejs
 RUN apt install -y npm
 RUN npm cache clean --force
-RUN npm install -g protobufjs
 
 # Get `fantacalcio-voti-live`
 RUN git clone -v https://github.com/andregri/fantacalcio-voti-live.git
@@ -23,6 +22,11 @@ RUN git clone -v https://github.com/andregri/fantacalcio-voti-live.git
 RUN python3 -m venv /venv && \
     /venv/bin/pip install -r fantacalcio-voti-live/requirements.txt && \
     rm -rf ~/.cache/pip
+
+# Install JS requirements
+RUN cd fantacalcio-voti-live && \
+    npm install protobufjs && \
+    cd ..
 
 # Install more dev utils
 RUN /venv/bin/pip install ipython && \

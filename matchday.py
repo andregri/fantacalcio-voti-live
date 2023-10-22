@@ -24,6 +24,7 @@ event_mapper = {
    20: "unknwon",  # ?
    21: "unknwon",  # ?
    22: "assist",
+   23: "unknown",  # ?
    # Custom events
    99: "cleansheet",
 }

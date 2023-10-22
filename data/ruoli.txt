@@ -125,11 +125,13 @@ C	Maldini
 C	Samardzic
 C	Ciurria
 A	Zapata D.
+A	Zapata D
 A	Lukaku
 A	Gonzalez N.
 A	Gonzalez N
 A	Mota
 A	Lauriente'
+A	Lauriente
 A	Ngonge
 P	Skorupski
 P	Sommer
@@ -205,6 +207,7 @@ C	Rabiot
 C	Frattesi
 C	Elmas
 C	Ricci S.
+C	Ricci S
 A	Chiesa
 A	Caputo
 A	Lookman

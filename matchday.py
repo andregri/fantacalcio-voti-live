@@ -40,6 +40,16 @@ modmodulo['P' + 5*'D' + 3*'C' + 2*'A'] = 0.5
 modmodulo['P' + 4*'D' + 5*'C' + 1*'A'] = 1
 modmodulo['P' + 5*'D' + 4*'C' + 1*'A'] = 1.5
 
+strmodulo = {}
+strmodulo['P' + 4*'D' + 4*'C' + 2*'A'] = '4-4-2'
+strmodulo['P' + 3*'D' + 5*'C' + 2*'A'] = '3-5-2'
+strmodulo['P' + 4*'D' + 3*'C' + 3*'A'] = '4-3-3'
+strmodulo['P' + 3*'D' + 4*'C' + 3*'A'] = '3-4-3'
+strmodulo['P' + 5*'D' + 3*'C' + 2*'A'] = '5-3-2'
+strmodulo['P' + 4*'D' + 5*'C' + 1*'A'] = '4-5-1'
+strmodulo['P' + 5*'D' + 4*'C' + 1*'A'] = '5-4-1'
+
+
 """
 {
     "goal": 3,
@@ -201,7 +211,7 @@ def calc_voto_live(giocatore, punteggi):
         return vote 
 
 
-def calc_tot_fantasquadra(titolari, panchinari, ruoli):
+def calc_fantasquadra(titolari, panchinari, ruoli):
     tot = 0
     modulo = ""
     for name, voto in titolari.items():
@@ -228,7 +238,7 @@ def calc_tot_fantasquadra(titolari, panchinari, ruoli):
         v = 0
     tot += v
 
-    return tot
+    return tot, strmodulo[modulo]
 
 
 def purge():
@@ -308,12 +318,13 @@ if __name__ == "__main__":
                 if any(i.startswith(squadre[name]) for i in unplayed):
                     m[name] = 6  # S.V.
 
-    totali = {team: calc_tot_fantasquadra(titolari, panchinari, ruoli)
+    output = {team: calc_fantasquadra(titolari, panchinari, ruoli)
               for team, (titolari, panchinari) in fantasquadre.items()}
 
-    table = sorted(totali, key=totali.get, reverse=True)
+    totali = {k: v for k, (v, _) in output.items()}
+    table = sorted(totali, key=lambda i: output[i][0], reverse=True)
 
-    print([(i, totali[i]) for i in table])
+    print([(i, *output[i]) for i in table])
     # Nicely formatted output...
     # max_width = max(len(i) for i in totali)
     # for i in table:

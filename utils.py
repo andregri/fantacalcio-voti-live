@@ -1,5 +1,6 @@
 import base64
 import requests
+import os
 import subprocess
 import json
 
@@ -62,7 +63,9 @@ def get_protobuf_message_b64(signed_uri):
 
 
 def decode_protobuf_live_msg(encoded_msg):
-    p = subprocess.Popen(['node', 'decode_livemessage_pb.js', encoded_msg], stdout=subprocess.PIPE)
+    script_directory = os.path.dirname(os.path.abspath(__file__))
+    decode_livemessage_pb = os.path.join(script_directory, 'decode_livemessage_pb.js')
+    p = subprocess.Popen(['node', decode_livemessage_pb, encoded_msg], stdout=subprocess.PIPE)
     out = p.stdout.read()
     return json.loads(out.decode())
 

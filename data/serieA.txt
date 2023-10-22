@@ -7,6 +7,7 @@ Di Gregorio	Mon
 Carnesecchi	Ata
 Skorupski	Bol
 Milinkovic-Savic V.	Tor
+MilinkovicSavic V	Tor
 Terracciano	Fio
 Silvestri	Udi
 Ochoa	Sal
@@ -15,6 +16,7 @@ Falcone	Lec
 Martinez Jo.	Gen
 Caprile	Emp
 Montipo'	Ver
+Montipo	    Ver
 Consigli	Sas
 Turati	Fro
 Cragno	Sas
@@ -57,6 +59,7 @@ Gori	Mon
 Dimarco	Int
 Di Lorenzo	Nap
 Hernandez T.	Mil
+Hernandez T	Mil
 Carlos Augusto	Int
 Posch	Bol
 Zappacosta	Ata
@@ -90,6 +93,7 @@ Toloi	Ata
 Cuadrado	Int
 Kolasinac	Ata
 N'dicka	Rom
+NDicka	Rom
 Kyriakopoulos	Mon
 Mari'	Mon
 Scalvini	Ata
@@ -99,6 +103,7 @@ Kristensen	Rom
 Izzo	Mon
 Luperto	Emp
 Rodriguez R.	Tor
+Rodriguez R	Tor
 Martin	Gen
 Demiral	Ata
 Bellanova	Tor
@@ -125,6 +130,7 @@ Toljan	Sas
 Zappa	Cag
 Vojvoda	Tor
 Llorente D.	Rom
+Llorente D	Rom
 Martinez Quarta	Fio
 Dragusin	Gen
 Kamara H.	Udi
@@ -162,6 +168,7 @@ Ferrari G.	Sas
 Venuti	Lec
 Kjaer	Mil
 Pellegrini Lu.	Laz
+Pellegrini Lu	Laz
 Gunter	Ver
 Dawidowicz	Ver
 Soumaoro	Bol
@@ -244,7 +251,7 @@ Pulisic	Mil
 Strefezza	Lec
 Frattesi	Int
 Ferguson	Bol
-Pellegrini Lo.	Rom
+Pellegrini Lo	Rom
 El Shaarawy	Rom
 Calhanoglu	Int
 Samardzic	Udi
@@ -261,6 +268,7 @@ Pasalic	Ata
 Pessina	Mon
 Zambo Anguissa	Nap
 Gudmundsson A.	Gen
+Gudmundsson A	Gen
 Ciurria	Mon
 Mkhitaryan	Int
 Loftus-Cheek	Mil
@@ -269,6 +277,7 @@ Fagioli	Juv
 Ikone'	Fio
 Bajrami	Sas
 Ricci S.	Tor
+Ricci S	Tor
 Pogba	Juv
 Locatelli	Juv
 Barak	Fio
@@ -283,6 +292,7 @@ Castrovilli	Fio
 Weah	Juv
 Miranchuk	Ata
 Ederson D.s.	Ata
+Ederson DS	Ata
 Mboula	Ver
 Cristante	Rom
 Mandragora	Fio
@@ -400,6 +410,7 @@ Saco	Nap
 Joselito	Ver
 Osimhen	Nap
 Martinez L.	Int
+Martinez L	Int
 Immobile	Laz
 Rafael Leao	Mil
 Kvaratskhelia	Nap
@@ -415,7 +426,9 @@ Thuram	Int
 Retegui	Gen
 Beto	Udi
 Lauriente'	Sas
+Lauriente	Sas
 Zapata D.	Ata
+Zapata D	Ata
 Milik	Juv
 Chiesa	Juv
 Okafor	Mil
@@ -424,6 +437,7 @@ Lapadula	Cag
 Abraham	Rom
 Caputo	Emp
 Gonzalez N.	Fio
+Gonzalez N	Fio
 Muriel	Ata
 Caprari	Mon
 Deulofeu	Udi
@@ -516,6 +530,7 @@ Isaksen	Laz
 Sommer	Int
 Corazza	Bol
 Christensen O.	Fio
+Christensen O	Fio
 Nzola	Fio
 Vlasic	Tor
 Audero	Int
@@ -524,6 +539,7 @@ Borbei	Lec
 Lukaku	Rom
 Ndoye	Bol
 Beltran L.	Fio
+Beltran L	Fio
 Kaba	Lec
 Barrenechea	Fro
 Paredes	Rom
@@ -533,4 +549,13 @@ Stewart	Sal
 Racic	Sas
 Prati	Cag
 Ikwuemesi	Sal
+Guendouzi	Laz
+Kristiansen	Bol
+Holm	Ata
+Malinovskyi	Gen
+Lindstrom	Nap
+Pereyra	Udi
+Lazaro	Tor
+Cheddira	Fro
+Pavard	Int
 Krstovic	Lec

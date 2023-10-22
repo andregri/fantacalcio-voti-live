@@ -154,7 +154,7 @@ def get_live_data():
     except KeyError:
         encoded = ''
 
-    data_live = decode_protobuf_live_msg(encoded)
+    data_live = decode_protobuf_live_msg(encoded[2:-1])
 
     # Merge past and live data
     data = {'protoData': (data_past.get('protoData', []) +

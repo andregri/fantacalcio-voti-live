@@ -20,16 +20,21 @@ C	Miretti
 A	Sanabria
 A	Kean
 A	Martinez L.
+A	Martinez L
 A	Rafael Leao
 A	Almqvist
 A	Cheddira
 P	Milinkovic-Savic V.
+P	MilinkovicSavic V
 P	Terracciano
 P	Christensen O.
+P	Christensen O
 D	Cuadrado
 D	Rodriguez R.
+D	Rodriguez R
 D	Martin
 D	Llorente D.
+D	Llorente D
 D	Dumfries
 D	Gatti
 D	Ebosele
@@ -78,7 +83,9 @@ P	Rui Patricio
 P	Turati
 D	Pavard
 D	Hernandez T.
+D	Hernandez T
 D	N'dicka
+D	NDicka
 D	Mazzocchi
 D	Casale
 D	Olivera
@@ -120,12 +127,14 @@ C	Ciurria
 A	Zapata D.
 A	Lukaku
 A	Gonzalez N.
+A	Gonzalez N
 A	Mota
 A	Lauriente'
 A	Ngonge
 P	Skorupski
 P	Sommer
 P	Montipo'
+P	Montipo
 D	De Vrij
 D	Faraoni
 D	Lazzari
@@ -148,9 +157,11 @@ A	Luvumbo
 A	Lucca
 A	Retegui
 A	Beltran L.
+A	Beltran L
 P	Perin
 P	Szczesny
 P	Martinez Jo.
+P	Martinez Jo
 D	Biraghi
 D	Danilo
 D	Bellanova
@@ -165,7 +176,9 @@ C	Strefezza
 C	Weah
 C	Mckennie
 C	Ederson D.s.
+C	Ederson DS
 C	Gudmundsson A.
+C	Gudmundsson A
 C	Ferguson
 A	Pinamonti
 A	Vlahovic

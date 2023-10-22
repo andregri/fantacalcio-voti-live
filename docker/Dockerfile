@@ -16,7 +16,7 @@ RUN apt install -y npm
 RUN npm cache clean --force
 
 # Get `fantacalcio-voti-live`
-RUN git clone -v https://github.com/andregri/fantacalcio-voti-live.git
+RUN git clone -v https://github.com/FabioLuporini/fantacalcio-voti-live.git
 
 # Install `fantacalcio-voti-live`
 RUN python3 -m venv /venv && \

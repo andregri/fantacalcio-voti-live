@@ -56,8 +56,11 @@ modmodulo['P' + 5*'D' + 4*'C' + 1*'A'] = 1.5
 """
 
 
+script_directory = os.path.dirname(os.path.abspath(__file__))
+
+
 def get_punteggi_lega():
-    path = "data/punteggi.json"  # TODO
+    path = os.path.join(script_directory, 'data', 'punteggi.json')
     with open(path, 'r') as file:
         punteggi = json.load(file)
 
@@ -67,7 +70,7 @@ def get_punteggi_lega():
 
 
 def get_ruoli_lega():
-    path = "data/ruoli.txt"  # TODO
+    path = os.path.join(script_directory, 'data', 'ruoli.txt')
     with open(path, 'r') as file:
         ruoli = file.readlines()
 
@@ -81,7 +84,7 @@ def get_ruoli_lega():
 
 
 def get_squadre_serieA():
-    path = "data/serieA.txt"  # TODO
+    path = os.path.join(script_directory, 'data', 'serieA.txt')
     with open(path, 'r') as file:
         serieA = file.readlines()
 
@@ -95,7 +98,7 @@ def get_squadre_serieA():
 
 
 def parse_fantasquadre():
-    path = "data/formazioni"  # TODO
+    path = os.path.join(script_directory, 'data', 'formazioni')
     fantasquadre = []
     for filename in os.listdir(path):
         if filename.startswith('.'):
@@ -126,11 +129,11 @@ def parse_fantasquadre():
 
 
 def get_live_data():
-    path = "data/giornata.txt"  # TODO
+    path = os.path.join(script_directory, 'data', 'giornata.txt')
     with open(path, 'r') as file:
         giornata = int(file.read())
 
-    path = "data/voti_live.json"  # TODO
+    path = os.path.join(script_directory, 'data', 'voti_live.json')
     with open(path, 'r') as file:
         data_past = json.load(file)
 
@@ -230,15 +233,16 @@ def calc_tot_fantasquadra(titolari, panchinari, ruoli):
 
 def purge():
     # Move tip to next matchday
-    path = "data/giornata.txt"  # TODO
+    path = os.path.join(script_directory, 'data', 'giornata.txt')
     with open(path, 'r') as file:
         giornata = int(file.read())
     with open(path, 'w') as file:
         file.write("%s" % (giornata + 1))
 
     # Stash votes
-    path = "data/voti_live.json"  # TODO
-    os.rename('data/voti_live.json', 'data/voti_giornata_%d.json' % giornata)
+    path = os.path.join(script_directory, 'data', 'voti_live.json')
+    newpath = os.path.join(script_directory, 'data', 'voti_giornata_%d.json' % giornata)
+    os.rename(path, newpath)
 
     # Recreate voti_live.json
     with open(path, 'w') as file:
@@ -307,7 +311,10 @@ if __name__ == "__main__":
     totali = {team: calc_tot_fantasquadra(titolari, panchinari, ruoli)
               for team, (titolari, panchinari) in fantasquadre.items()}
 
+    table = sorted(totali, key=totali.get, reverse=True)
+
+    print([(i, totali[i]) for i in table])
     # Nicely formatted output...
-    max_width = max(len(i) for i in totali)
-    for i in sorted(totali, key=totali.get, reverse=True):
-        print(f"{i:>{max_width}} {totali[i]:.1f}")
+    # max_width = max(len(i) for i in totali)
+    # for i in table:
+    #     print(f"{i:>{max_width}} {totali[i]:.1f}")
